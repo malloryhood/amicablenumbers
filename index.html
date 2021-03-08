@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+	<head>
+		<title> Amicable Numbers </title>
+		<link rel="stylesheet" type = "text/css" href="amicableStyle.css">
+        <script language="JavaScript">
+            function getFact(num)
+            {
+                var factors = [];
+				factors.push(1);
+                for (i = 2; i < num; i++)
+                {
+                   if ((num % i) == 0)
+                   {
+                       factors.push(i);
+                   }
+                }
+                return factors;
+            }
+            
+            function checkAm(factors,num)
+            {
+                sum = 0;
+                for (j = 0; j < factors.length; j++)
+                {
+                    sum = sum + factors[j];
+                }
+                if (sum == num)
+                {
+                    return true;
+                }
+                else
+                {
+                   return false; 
+                }
+            }
+			
+			function listFrmArr(factors)
+			{
+				factorsList ="";
+				for (n=0;n<factors.length-1;n++)
+				{
+					factorsList = factorsList + factors[n] + ","
+				}
+				factorsList = factorsList + factors[n];
+				return factorsList;
+			}
+			
+			function alertFact(factors1,factors2, numOne, numTwo)
+			{
+				factorsList1 = listFrmArr(factors1);
+				factorsList2 = listFrmArr(factors2);
+				alert("First Number: "+ numOne + "\n Factors: "+ factorsList1 + "\n\n Second number: " + numTwo + "\n Factors: " + factorsList2)
+			}
+						
+
+            
+            function final(){
+                numOne=document.getElementById('num1').value;
+                numTwo=document.getElementById('num2').value;
+                factors1 = getFact(numOne);
+				factors2 = getFact(numTwo);
+				amic2=checkAm(factors1,numTwo)
+                amic1=checkAm(factors2,numOne);
+                if (amic1 == true && amic2 == true) 
+                {
+                    document.getElementById("here").innerHTML += "<br><h2>The numbers: " + numOne + " and " + numTwo + " are amicable!</h2><br>";
+                }
+                else 
+                {
+                    document.getElementById("here").innerHTML += ("<br><h2>The numbers: " + numOne + " and " + numTwo + " are not amicable.</h2><br>")
+                }
+				alertFact(factors1,factors2, numOne, numTwo)
+            }
+        </script>
+    </head>
+    <body>
+		<h1> Are my numbers amicable? </h1>
+        <form>
+            Enter first number: <input type 'text'; id='num1'><br>
+            Enter second number: <input type = 'text' id='num2'><br>
+            <input type='button' value='Check amicability!' onclick='final()'><br>
+        </form>
+        <div id = "here">
+        </div>
+        
+    </body>
+</html>
